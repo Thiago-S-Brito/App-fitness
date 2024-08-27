@@ -7,12 +7,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity(), OnItemClickListener {
@@ -63,8 +61,17 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
 //        }
     }
 
-    override fun onClick() {
-        Log.i("teste", "clicou!")
+    override fun onClick(id: Int) {
+        when(id) {
+            1 -> {
+                val intent = Intent(this, ImcActivity::class.java)
+                startActivity(intent)
+            }
+            2 -> {
+                //abrir uma outra activity
+            }
+        }
+        Log.i("teste", "clicou $id!")
     }
 
     private inner class MainAdapter(
@@ -101,20 +108,14 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
                 container.setBackgroundColor(item.color)
 
                 container.setOnClickListener {
-                    OnItemClickListener.onClick()
+                    onItemClickListener.onClick(item.id)
 
-//                    val intent = Intent(this, ImcActivity::class.java)
-//                    startActivity(intent)
 
                 }
             }
         }
 
     }
-
-
-
-
 
     // 3 maneiras de clicar(escutar eventos de click) usando celular (viewholder) activities
     //1. implementação de inteface
